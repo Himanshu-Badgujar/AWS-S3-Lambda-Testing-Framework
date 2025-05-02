@@ -24,9 +24,6 @@ class LambdaTestBase:
         return [event["message"] for event in response["events"]]
 
     def wait_for_image_key_in_logs(self, image_key, retries=10, delay=5):
-        """
-        Waits until the uploaded image_key appears in any of the recent Lambda logs.
-        """
         for attempt in range(retries):
             print(f"Attempt {attempt + 1}: checking logs for key '{image_key}'")
             for stream in self.get_recent_log_streams():
