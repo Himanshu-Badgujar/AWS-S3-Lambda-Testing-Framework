@@ -26,13 +26,3 @@ def logs_client(aws_region):
 def test_image_key():
     return f"test-upload-{uuid.uuid4().hex[:8]}.png"
 
-@pytest.fixture
-def upload_test_image(s3_client, bucket_name, test_image_key):
-    with open("test_image.png", "rb") as f:
-        s3_client.upload_fileobj(f, bucket_name, test_image_key)
-
-    yield test_image_key
-
-    print(f"Cleaning up: deleting {test_image_key}")
-    s3_client.delete_object(Bucket=bucket_name, Key=test_image_key)
-
