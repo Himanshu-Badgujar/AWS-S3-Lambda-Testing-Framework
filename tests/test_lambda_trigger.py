@@ -9,6 +9,3 @@ def test_s3_upload_triggers_lambda(s3_client, bucket_name, logs_client, test_ima
 
     found = base.wait_for_image_key_in_logs(test_image_key)
     assert found, f"Expected image key '{test_image_key}' not found in recent logs"
-
-    print(f"Cleaning up: deleting {test_image_key}")
-    s3_client.delete_object(Bucket=bucket_name, Key=test_image_key)
